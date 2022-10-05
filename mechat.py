@@ -6,6 +6,8 @@ root = Tk()
 def chat():
     chat = "Me:"+ e.get()
     text.insert(END,"\n" + chat)
+    match = re.search(r'([\d\-+*\\]+)', e.get())
+    
     if(e.get().lower()=='hi'or e.get().lower()=='hello' or e.get().lower()=='hey'):
         text.insert(END, "\n" + "Bot: Hey, how may I help you...")
     elif(e.get().lower()=='how are you?'):
@@ -24,18 +26,12 @@ def chat():
         text.insert(END, "\n" + "Bot: What th dude. I'm a robot developed by Greg...\n HUMANS!(sigh)")
     elif (e.get().lower() == "not funny"):
         text.insert(END, "\n" + "Bot: Lol...I'll try harder next time")
+    elif match:
+        expr = match[1]
+        text.insert(END, "\n" + f"Bot: The answer is {eval(expr)}")
     else:
         text.insert(END, "\n" + "Bot: I don't understand.")
 
-def calculate(a,b,c):
-    if b == 'divided by':
-        return a/c
-    if b == 'plus':
-        return a+c
-    if b == 'minus':
-        return a-c
-    if b == 'times' or b=='multiplied by':
-        return a*c
     
     
 text = Text(root,bg='white', fg='red')
